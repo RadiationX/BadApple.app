@@ -73,15 +73,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func playMusic(config: Config) -> AVAudioPlayer? {
         do {
-            let laudioURL = URL(fileURLWithPath: config.musicPath)
-            let audioPlayer = try AVAudioPlayer(contentsOf: laudioURL, fileTypeHint: AVFileType.mp3.rawValue)
+            guard let audioURL = Bundle.main.url(forResource: "bad_apple", withExtension: "mp3") else {
+                fatalError("No audio bundle")
+            }
+
+            let audioPlayer = try AVAudioPlayer(contentsOf: audioURL, fileTypeHint: AVFileType.mp3.rawValue)
             audioPlayer.rate = Float(config.speed)
             audioPlayer.enableRate = config.speed != 1.0
             audioPlayer.prepareToPlay()
             audioPlayer.play()
             return audioPlayer
         } catch {
-            print("audio error \(error)")
+            print("Audio error \(error)")
         }
         return nil
     }

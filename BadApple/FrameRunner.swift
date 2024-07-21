@@ -39,9 +39,10 @@ class FrameRunner {
     }
 
     private static func getFrames(config: Config) throws -> [[Box]] {
-        guard let handle = FileHandle(forReadingAtPath: config.boxesPath) else {
-            fatalError("Failed to open file")
+        guard let boxesURL = Bundle.main.url(forResource: "boxes", withExtension: "bin") else {
+            fatalError("No boxes bundle")
         }
+        let handle = try FileHandle(forReadingFrom: boxesURL)
         var frames: [[Box]] = []
         var temp: [Box] = []
         while true {
