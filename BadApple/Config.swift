@@ -13,13 +13,15 @@ class Config {
 
     let speed: Double
     let shadows: Bool
+    let withTitle: Bool
     let maxBoxes: Int
     let boxesUrl: URL
     let musicUrl: URL
 
-    init(speed: Double, shadows: Bool, maxBoxes: Int, boxesUrl: URL, musicUrl: URL) {
+    init(speed: Double, shadows: Bool, withTitle: Bool, maxBoxes: Int, boxesUrl: URL, musicUrl: URL) {
         self.speed = speed
         self.shadows = shadows
+        self.withTitle = withTitle
         self.maxBoxes = maxBoxes
         self.boxesUrl = boxesUrl
         self.musicUrl = musicUrl

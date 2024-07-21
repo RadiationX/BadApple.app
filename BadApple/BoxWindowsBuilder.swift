@@ -24,7 +24,13 @@ class BoxWindowsBuilder {
             backing: .buffered,
             defer: true
         )
-        window.title = "Bad Apple"
+        if config.withTitle {
+            window.title = "Bad Apple"
+            window.titleVisibility = .visible
+        } else {
+            window.titleVisibility = .hidden
+        }
+
         window.titlebarAppearsTransparent = true
         window.backgroundColor = NSColor.white
         window.hasShadow = config.shadows

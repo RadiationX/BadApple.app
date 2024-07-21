@@ -10,7 +10,6 @@ import AVFoundation
 import AVKit
 import Cocoa
 
-@main
 class AppDelegate: NSObject, NSApplicationDelegate {
     private let config: Config
 
@@ -29,9 +28,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // needs save reference
         audioPlayer = AudioPlayer.playMusic(config: config)
 
-        framesTask = Task {
+        Task {
             try await FrameRunner.run(frames: frames, config: config) { frame in
-                print("frame")
                 let lastFrameIndex = frame.count() - 1
 
                 for index in 0 ..< windows.count {
@@ -46,21 +44,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
             NSApplication.shared.terminate(nil)
         }
-    }
-    
-    func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
-        print("applicationShouldTerminate")
-        return .terminateCancel
-    }
-
-    func applicationWillTerminate(_ aNotification: Notification) {
-        print("applicationWillTerminate")
-        framesTask?.cancel()
-        audioPlayer?.stop()
-        audioPlayer = nil
-    }
-
-    func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
-        return false
     }
 }
