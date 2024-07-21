@@ -10,82 +10,57 @@ import AVFoundation
 import AVKit
 import Cocoa
 
+@main
 class AppDelegate: NSObject, NSApplicationDelegate {
     private let config: Config
 
-    private var audioPlayer: AVAudioPlayer!
+    private var audioPlayer: AVAudioPlayer?
+
+    private var framesTask: Task<Void, any Error>?
 
     init(config: Config) {
         self.config = config
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        let screen = NSScreen.main!.visibleFrame
-        let widthRatio = Double(screen.width) / Config.baseWidth
-        let heightRatio = Double(screen.height) / Config.baseHeight
+        let screenConfig = ScreenConfig(screen: NSScreen.main!)
+        let windows = BoxWindowsBuilder.createAll(config: config, screenConfig: screenConfig)
+        let frames = try! FramesReader.getFrames(config: config)
+        // needs save reference
+        audioPlayer = AudioPlayer.playMusic(config: config)
 
-        var windows: [BoxWindow] = []
-        for _ in 0 ... min(config.maxBoxes, 155) {
-            windows.append(createWindow(config: config))
-        }
-
-        audioPlayer = playMusic(config: config)
-
-        Task {
-            let offsetY = screen.origin.y
-            try await FrameRunner.run(config: config) { frame in
-                let lastFrameIndex = frame.count - 1
+        framesTask = Task {
+            try await FrameRunner.run(frames: frames, config: config) { frame in
+                print("frame")
+                let lastFrameIndex = frame.count() - 1
 
                 for index in 0 ..< windows.count {
                     let window = windows[index]
                     let visible = index <= lastFrameIndex
                     window.setVisible(visible: visible)
                     if visible {
-                        window.setBox(box: frame[index])
+                        window.setBox(box: frame.getBox(index: index))
                     }
-                    window.draw(widthRatio: widthRatio, heightRatio: heightRatio, offsetY: offsetY)
+                    window.draw()
                 }
             }
             NSApplication.shared.terminate(nil)
         }
     }
+    
+    func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
+        print("applicationShouldTerminate")
+        return .terminateCancel
+    }
 
-    func applicationWillTerminate(_ aNotification: Notification) {}
+    func applicationWillTerminate(_ aNotification: Notification) {
+        print("applicationWillTerminate")
+        framesTask?.cancel()
+        audioPlayer?.stop()
+        audioPlayer = nil
+    }
 
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
-        return true
-    }
-
-    private func createWindow(config: Config) -> BoxWindow {
-        let window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 0, height: 0),
-            styleMask: [.closable, .titled],
-            backing: .buffered,
-            defer: true
-        )
-        window.titleVisibility = .hidden
-        window.titlebarAppearsTransparent = true
-        window.backgroundColor = NSColor.white
-        window.hasShadow = config.shadows
-
-        return BoxWindow(window: window)
-    }
-
-    func playMusic(config: Config) -> AVAudioPlayer? {
-        do {
-            guard let audioURL = Bundle.main.url(forResource: "bad_apple", withExtension: "mp3") else {
-                fatalError("No audio bundle")
-            }
-
-            let audioPlayer = try AVAudioPlayer(contentsOf: audioURL, fileTypeHint: AVFileType.mp3.rawValue)
-            audioPlayer.rate = Float(config.speed)
-            audioPlayer.enableRate = config.speed != 1.0
-            audioPlayer.prepareToPlay()
-            audioPlayer.play()
-            return audioPlayer
-        } catch {
-            print("Audio error \(error)")
-        }
-        return nil
+        return false
     }
 }

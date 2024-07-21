@@ -8,12 +8,20 @@
 import Cocoa
 import Foundation
 
+guard let musicUrl = Bundle.main.url(forResource: "bad_apple", withExtension: "mp3") else {
+    fatalError("No audio bundle")
+}
+
+guard let boxesUrl = Bundle.main.url(forResource: "boxes", withExtension: "bin") else {
+    fatalError("No boxes bundle")
+}
+
 let config = Config(
     speed: 1.0,
     shadows: true,
     maxBoxes: 200,
-    boxesPath: "/Users/radiationx/boxes.bin",
-    musicPath: "/Users/radiationx/bad_apple.mp3"
+    boxesUrl: boxesUrl,
+    musicUrl: musicUrl
 )
 let delegate = AppDelegate(config: config)
 NSApplication.shared.delegate = delegate

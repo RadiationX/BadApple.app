@@ -10,14 +10,16 @@ import Foundation
 
 class BoxWindow {
     private let window: NSWindow
+    private let screenConfig: ScreenConfig
 
     private var box: Box = .EMPTY
     private var visible = false
     private var boxStale = false
     private var visibleStale = false
 
-    init(window: NSWindow) {
+    init(window: NSWindow, screenConfig: ScreenConfig) {
         self.window = window
+        self.screenConfig = screenConfig
     }
 
     func setBox(box: Box) {
@@ -30,14 +32,14 @@ class BoxWindow {
         self.visible = visible
     }
 
-    func draw(widthRatio: Double, heightRatio: Double, offsetY: Double) {
+    func draw() {
         if boxStale {
             boxStale = false
             window.setFrame(NSRect(
-                x: box.x * widthRatio,
-                y: (Config.baseHeight - box.y - box.height) * heightRatio + offsetY,
-                width: box.width * widthRatio,
-                height: box.height * heightRatio
+                x: box.x * screenConfig.widthRatio,
+                y: (Config.baseHeight - box.y - box.height) * screenConfig.heightRatio + screenConfig.offsetY,
+                width: box.width * screenConfig.widthRatio,
+                height: box.height * screenConfig.heightRatio
             ), display: false, animate: false)
         }
 

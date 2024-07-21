@@ -18,6 +18,11 @@
 		A29A0BBA2C4D68F10095195C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29A0BB22C4D68F10095195C /* main.swift */; };
 		A29A0BD52C4D74C40095195C /* bad_apple.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A29A0BD42C4D74C40095195C /* bad_apple.mp3 */; };
 		A29A0BD72C4D74CC0095195C /* boxes.bin in Resources */ = {isa = PBXBuildFile; fileRef = A29A0BD62C4D74CC0095195C /* boxes.bin */; };
+		A29A0BDA2C4D77910095195C /* BoxWindowsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29A0BD92C4D77910095195C /* BoxWindowsBuilder.swift */; };
+		A29A0BDC2C4D79AE0095195C /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29A0BDB2C4D79AE0095195C /* AudioPlayer.swift */; };
+		A29A0BDE2C4D7A3A0095195C /* ScreenConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29A0BDD2C4D7A3A0095195C /* ScreenConfig.swift */; };
+		A29A0BE02C4D7D9E0095195C /* Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29A0BDF2C4D7D9E0095195C /* Frame.swift */; };
+		A29A0BE22C4D7DCE0095195C /* FramesReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29A0BE12C4D7DCE0095195C /* FramesReader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +39,11 @@
 		A29A0BB22C4D68F10095195C /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A29A0BD42C4D74C40095195C /* bad_apple.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bad_apple.mp3; sourceTree = "<group>"; };
 		A29A0BD62C4D74CC0095195C /* boxes.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = boxes.bin; sourceTree = "<group>"; };
+		A29A0BD92C4D77910095195C /* BoxWindowsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxWindowsBuilder.swift; sourceTree = "<group>"; };
+		A29A0BDB2C4D79AE0095195C /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		A29A0BDD2C4D7A3A0095195C /* ScreenConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenConfig.swift; sourceTree = "<group>"; };
+		A29A0BDF2C4D7D9E0095195C /* Frame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Frame.swift; sourceTree = "<group>"; };
+		A29A0BE12C4D7DCE0095195C /* FramesReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FramesReader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,9 +79,14 @@
 				A29A0BD62C4D74CC0095195C /* boxes.bin */,
 				A29A0BD42C4D74C40095195C /* bad_apple.mp3 */,
 				A29A0BAD2C4D68F10095195C /* AppDelegate.swift */,
+				A29A0BDB2C4D79AE0095195C /* AudioPlayer.swift */,
+				A29A0BD92C4D77910095195C /* BoxWindowsBuilder.swift */,
 				A29A0BAE2C4D68F10095195C /* Box.swift */,
+				A29A0BDF2C4D7D9E0095195C /* Frame.swift */,
+				A29A0BE12C4D7DCE0095195C /* FramesReader.swift */,
 				A29A0BAF2C4D68F10095195C /* BoxWindow.swift */,
 				A29A0BB02C4D68F10095195C /* Config.swift */,
+				A29A0BDD2C4D7A3A0095195C /* ScreenConfig.swift */,
 				A29A0BB12C4D68F10095195C /* Extensions.swift */,
 				A29A0BAB2C4D68F10095195C /* FrameRunner.swift */,
 				A29A0BB22C4D68F10095195C /* main.swift */,
@@ -163,10 +178,15 @@
 			files = (
 				A29A0BB92C4D68F10095195C /* Extensions.swift in Sources */,
 				A29A0BB42C4D68F10095195C /* Ticker.swift in Sources */,
+				A29A0BDA2C4D77910095195C /* BoxWindowsBuilder.swift in Sources */,
 				A29A0BB62C4D68F10095195C /* Box.swift in Sources */,
 				A29A0BB52C4D68F10095195C /* AppDelegate.swift in Sources */,
+				A29A0BE22C4D7DCE0095195C /* FramesReader.swift in Sources */,
 				A29A0BBA2C4D68F10095195C /* main.swift in Sources */,
 				A29A0BB82C4D68F10095195C /* Config.swift in Sources */,
+				A29A0BDC2C4D79AE0095195C /* AudioPlayer.swift in Sources */,
+				A29A0BDE2C4D7A3A0095195C /* ScreenConfig.swift in Sources */,
+				A29A0BE02C4D7D9E0095195C /* Frame.swift in Sources */,
 				A29A0BB72C4D68F10095195C /* BoxWindow.swift in Sources */,
 				A29A0BB32C4D68F10095195C /* FrameRunner.swift in Sources */,
 			);
