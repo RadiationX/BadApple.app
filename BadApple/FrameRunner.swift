@@ -9,7 +9,7 @@ import Foundation
 
 class FrameRunner {
     static func run(frames: [Frame], config: Config, frameCallback: (Frame) async -> ()) async throws {
-        let ticker = Ticker(tps: UInt(30.0 * config.speed))
+        let ticker = Ticker(tps: UInt(Config.tps * config.speed))
         let lastFrameIndex = frames.count - 1
         var nextTick = ticker.ticks()
         var skippedFrames = 0

@@ -10,6 +10,7 @@ import Foundation
 class Config {
     static let baseWidth = 64.0
     static let baseHeight = 48.0
+    static let tps = 30.0
 
     let speed: Double
     let shadows: Bool
