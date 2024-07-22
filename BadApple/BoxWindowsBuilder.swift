@@ -34,6 +34,7 @@ class BoxWindowsBuilder {
         window.titlebarAppearsTransparent = true
         window.backgroundColor = NSColor.white
         window.hasShadow = config.shadows
+        window.contentView = nil
 
         return BoxWindow(window: window, screenConfig: screenConfig)
     }

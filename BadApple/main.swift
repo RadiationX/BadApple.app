@@ -17,7 +17,7 @@ guard let boxesUrl = Bundle.main.url(forResource: "boxes", withExtension: "bin")
 }
 
 let config = Config(
-    speed: 4.0,
+    speed: 1.0,
     shadows: true,
     withTitle: true,
     maxBoxes: 200,

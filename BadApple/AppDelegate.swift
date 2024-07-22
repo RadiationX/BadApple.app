@@ -15,8 +15,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private var audioPlayer: AVAudioPlayer?
 
-    private var framesTask: Task<Void, any Error>?
-
     init(config: Config) {
         self.config = config
     }
